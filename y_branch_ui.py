@@ -3,6 +3,26 @@ import sys
 from PyQt6.QtWidgets import QApplication, QWidget, QVBoxLayout, QFormLayout, QLineEdit, QPushButton, QLabel, QCheckBox
 from PyQt6.QtCore import Qt
 from y_class import YBranchOptimization  # Assuming your class is saved in YBranchOptimization.py
+import os
+# Function to auto-detect Lumerical Python installation
+
+def find_lumerical_python():
+    possible_paths = [
+        r"C:/Program Files/Lumerical/v242/python/python.exe",
+        r"C:/Program Files/Lumerical/v241/python/python.exe",
+        r"C:/Program Files/Lumerical/Ansys/python/python.exe",
+        r"D:/Lumerical/v242/python/python.exe",
+        r"D:/Lumerical/v241/python/python.exe",
+        r"E:/Lumerical/v242/python/python.exe",
+        r"E:/Lumerical/v241/python/python.exe",
+    ]
+    for path in possible_paths:
+        if os.path.exists(path):
+            return path
+    raise FileNotFoundError("Lumerical Python environment not found. Please check the installation path.")
+
+# Auto-detect Lumerical Python environment
+python_executable = find_lumerical_python()
 
 class OptimizationGUI(QWidget):
     def __init__(self):
@@ -115,7 +135,7 @@ class OptimizationGUI(QWidget):
         gpu = self.gpu_checkbox.isChecked()
 
         # Prepare the command to run the script in Lumerical's Python environment
-        python_executable = r"C:/Program Files/Lumerical/v242/python/python.exe"
+        
         script_path = r"y_branch_run_opt.py"  # The path to your script file
 
         # Build the arguments for the subprocess call
@@ -166,7 +186,7 @@ class OptimizationGUI(QWidget):
         gpu = self.gpu_checkbox.isChecked()
 
         # Prepare the command to run the initialization function in Lumerical's Python environment
-        python_executable = r"C:/Program Files/Lumerical/v242/python/python.exe"
+        # python_executable = r"C:/Program Files/Lumerical/v242/python/python.exe"
         script_path = r"y_branch_init_script.py"  # Path to a separate Python script containing the initialization function
 
         # Build the arguments for the subprocess call
