@@ -90,7 +90,7 @@ def find_lumerical_python():
 ## **File Structure**
 ```
 YBranchOptimizationGUI/
-│── main.py                     # PyQt6 GUI script
+│── y_branch_ui.py                     # PyQt6 GUI script
 │── y_branch_run_opt.py          # Runs optimization
 │── y_branch_init_script.py      # Initializes FDTD setup
 │── y_class.py                   # YBranchOptimization class definition
